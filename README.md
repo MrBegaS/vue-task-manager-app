@@ -16,8 +16,6 @@ The application allows users to create, complete, delete and filter tasks. It al
 
 Coming soon
 
-> After publishing the project with GitHub Pages, replace this text with your live demo link.
-
 ---
 
 ## ✨ Features
