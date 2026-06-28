@@ -14,7 +14,7 @@ The application allows users to create, complete, delete and filter tasks. It al
 
 ## 🚀 Live Demo
 
-Coming soon
+https://mrbegas.github.io/vue-task-manager-app/git 
 
 ---
 
