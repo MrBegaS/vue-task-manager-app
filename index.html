@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main id="aufgabenApp">
+
+    <div class="toolbar">
+
+        <button
+            class="theme-btn"
+            type="button"
+            @click="toggleDarkMode">
+
+            {{ darkMode ? "☀️ Light" : "🌙 Dark" }}
+
+        </button>
+
+    </div>
+
+    <header>
+
+        <h1>Vue Task Manager</h1>
+
+        <p class="subtitle">
+            Organize your daily tasks with Vue.js
+        </p>
+
+    </header>
+
+    <section class="input-section">
+
+        <label
+            for="neueAufgabe"
+            class="sr-only">
+
+            Neue Aufgabe
+
+        </label>
+
+        <input
+            id="neueAufgabe"
+            type="text"
+            v-model="neueAufgabe"
+            @keyup.enter="aufgabeAnlegen"
+            placeholder="Neue Aufgabe hinzufügen..."
+            aria-label="Neue Aufgabe">
+
+        <button
+            type="button"
+            @click="aufgabeAnlegen">
+
+            Hinzufügen
+
+        </button>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <span>{{ aufgaben.length }}</span>
+
+            <small>Alle</small>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>{{ nochTunAnzahl }}</span>
+
+            <small>Offen</small>
+
+        </div>
+
+        <div class="stat-card">
+
+            <span>{{ erledigtAnzahl }}</span>
+
+            <small>Erledigt</small>
+
+        </div>
+
+    </section>
+
+    <section class="filter-buttons">
+
+        <button
+            type="button"
+            :class="{ active: filter === 'alle' }"
+            @click="filter='alle'">
+
+            Alle
+
+        </button>
+
+        <button
+            type="button"
+            :class="{ active: filter === 'offen' }"
+            @click="filter='offen'">
+
+            Offen
+
+        </button>
+
+        <button
+            type="button"
+            :class="{ active: filter === 'erledigt' }"
+            @click="filter='erledigt'">
+
+            Erledigt
+
+        </button>
+
+    </section>
+
+    <section>
+
+        <ul class="aufgaben-liste">
+
+            <li
+                v-for="(aufgabe, index) in gefilterteAufgaben"
+                :key="index">
+
+                <label :class="{ erledigt: aufgabe.erledigt }">
+
+                    <input
+                        type="checkbox"
+                        :checked="aufgabe.erledigt"
+                        @change="toggleAufgabe(aufgabe)">
+
+                    {{ aufgabe.text }}
+
+                </label>
+
+                <button
+                    class="delete-btn"
+                    type="button"
+                    title="Aufgabe löschen"
+                    @click="aufgabeEntfernen(index)">
+
+                    ×
+
+                </button>
+
+            </li>
+
+        </ul>
+
+    </section>
+
+    <p
+        v-if="gefilterteAufgaben.length === 0"
+        class="empty">
+
+        Keine Aufgaben gefunden.
+
+    </p>
+
+    <transition name="fade">
+
+        <section
+            v-if="showMessage"
+            class="success-message">
+
+            <h3>🎉 Gute Wahl!</h3>
+
+            <p>
+                Vielen Dank für Ihre Einladung.
+            </p>
+
+            <p>
+                Ich freue mich darauf,
+                Ihnen meine Fähigkeiten persönlich vorstellen zu dürfen.
+            </p>
+
+            <p>
+                Bis bald! 🚀
+            </p>
+
+        </section>
+
+    </transition>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+
+</body>
+
+</html>
