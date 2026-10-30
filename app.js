@@ -1,4 +1,5 @@
-﻿const app = {
+﻿
+const app = {
 
     data() {
 
@@ -71,14 +72,6 @@
 
     mounted() {
 
-        const gespeicherteAufgaben = JSON.parse(localStorage.getItem("aufgaben"));
-
-        if (gespeicherteAufgaben) {
-
-            this.aufgaben = gespeicherteAufgaben;
-
-        }
-
         const dark = JSON.parse(localStorage.getItem("darkMode"));
 
         if (dark) {
@@ -92,21 +85,6 @@
     },
 
     watch: {
-
-        aufgaben: {
-
-            handler(neueListe) {
-
-                localStorage.setItem(
-                    "aufgaben",
-                    JSON.stringify(neueListe)
-                );
-
-            },
-
-            deep: true
-
-        },
 
         darkMode(neuerWert) {
 
